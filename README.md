@@ -4,4 +4,4 @@
   <!-- <a href="https://melpa.org/#/poly-org"><img alt="MELPA" src="https://melpa.org/packages/poly-org-badge.svg"/></a> -->
 </p>
 
-Polymode for the [Vue.js](https://vuejs.org) single component files.
+Polymode for [Vue.js](https://vuejs.org) single component files.
