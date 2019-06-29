@@ -121,7 +121,7 @@
   :fallback-mode 'vue-html-mode
   :head-mode 'host
   :tail-mode 'host
-  :head-matcher "^<template"
+  :head-matcher "^<template.*?>\n"
   :tail-matcher "^</template>"
   :mode-matcher #'poly-vue-template-mode-matcher
   :body-indent-offset 'vue-html-extra-indent)
@@ -130,7 +130,7 @@
   :fallback-mode 'js2-mode
   :head-mode 'host
   :tail-mode 'host
-  :head-matcher "^<script"
+  :head-matcher "^<script.*?>\n"
   :tail-matcher "^</script>"
   :mode-matcher #'poly-vue-script-mode-matcher
   :body-indent-offset 0)
@@ -139,7 +139,7 @@
   :fallback-mode 'css-mode
   :head-mode 'host
   :tail-mode 'host
-  :head-matcher "^<style"
+  :head-matcher "^<style.*?>\n"
   :tail-matcher "^</style>"
   :mode-matcher #'poly-vue-style-mode-matcher
   :body-indent-offset 0)
