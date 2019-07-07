@@ -1,7 +1,9 @@
 language: nix
 
 script:
-  - nix-build
+  - nix-build -A byte-compile --no-out-link --quiet
+  - nix-build -A checkdoc --no-out-link --quiet
+  - nix-shell -A package-lint --pure --quiet
 
 matrix:
   include:
@@ -11,3 +13,4 @@ matrix:
 cache:
   directories:
     - /nix/store
+    - /dev/shm/package-lint
