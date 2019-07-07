@@ -33,6 +33,8 @@
 
 ;;; Code:
 
+(require 'polymode)
+
 (defconst poly-vue-generic-head-regexp
   (rx bol "<%s"
       (? (and (+ space)
@@ -89,7 +91,10 @@
 
 (defcustom poly-vue-style-languages
   '(("scss" . scss-mode))
-  "Alist of language names and major modes supported in stylesheets.")
+  "Alist of language names and major modes supported in stylesheets."
+  :type '(alist :key-type string
+                :value-type symbol)
+  :group 'poly-vue)
 
 (define-hostmode poly-vue-hostmode
   :mode 'sgml-mode
