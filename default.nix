@@ -3,7 +3,7 @@ let
   check-package = import (builtins.fetchGit {
     url = "https://github.com/akirak/emacs-package-checker";
     ref = "master";
-    rev = "327d9ade9b2ea6a2f7799dcb1689865846dab1de";
+    rev = "1553d9f6c8d61e8f455f22e4a1d0743bc8cd48a9";
   });
 in check-package {
   inherit emacs pkgs;
