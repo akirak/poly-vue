@@ -19,6 +19,10 @@ jobs:
     - name: check if nix is installed
       run: nix-env --version
     - uses: actions/checkout@v1
+    # TODO: Delete after successfully running Emacs on GitHub Actions
+    - name: Install Emacs
+      run: nix-env -iA emacs-25-2 -f https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz
+    - run: emacs --version
     - name: Run tests
       run: |
         nix-build -A byte-compile --no-out-link --quiet
