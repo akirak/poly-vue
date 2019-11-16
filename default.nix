@@ -14,5 +14,5 @@ in check-package {
   emacsPackages = epkgs: (with epkgs.melpaPackages; [
     polymode
   ]);
-  emacs = emacs-ci.emacs-25-1;
+  emacs = emacs-ci.emacs-25-2;
 }
