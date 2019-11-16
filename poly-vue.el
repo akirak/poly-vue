@@ -51,20 +51,29 @@
 (defconst poly-vue-script-head-regexp
   (format poly-vue-generic-head-regexp "script"))
 
-(and (+ space)
-     "lang="
-     (any "\"'")
-     (group (+ (any alpha)))
-     (any "\"'"))
-(* (and space (or "scoped"
-                  "module"
-                  (and (+ (any wordchar))
-                       "="
-                       (any "\"'")
-                       (*? anything)
-                       (any "\"'")))))
-(* space)
-">" eol))
+(defconst poly-vue-style-head-regexp
+  (rx bol "<style"
+      (* (and space (or "scoped"
+                        "module"
+                        (and (+ (any wordchar))
+                             "="
+                             (any "\"'")
+                             (*? anything)
+                             (any "\"'")))))
+      (and (+ space)
+           "lang="
+           (any "\"'")
+           (group (+ (any alpha)))
+           (any "\"'"))
+      (* (and space (or "scoped"
+                        "module"
+                        (and (+ (any wordchar))
+                             "="
+                             (any "\"'")
+                             (*? anything)
+                             (any "\"'")))))
+      (* space)
+      ">" eol))
 
 (defcustom poly-vue-template-languages
   '(("html" . vue-html-mode))
