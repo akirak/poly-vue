@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    paths-ignore:
+    - '**/*.md'
+    - '**/*.org'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install nix
+      uses: cachix/install-nix-action@v5
+    - name: check if nix is installed
+      run: nix-env --version
+    - uses: actions/checkout@v1
+    - name: Run tests
+      run: |
+        nix-build -A byte-compile --no-out-link --quiet
+        nix-build -A checkdoc --no-out-link --quiet
+        nix-shell -A package-lint --pure --quiet
