@@ -1,10 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 let
-  check-package = import (builtins.fetchGit {
-    url = "https://github.com/akirak/emacs-package-checker";
-    ref = "master";
-    rev = "1553d9f6c8d61e8f455f22e4a1d0743bc8cd48a9";
-  });
+  check-package = import (builtins.fetchTarball "https://github.com/akirak/emacs-package-checker/archive/master.tar.gz");
   emacs-ci = import (builtins.fetchTarball "https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz");
   emacs = emacs-ci.emacs-25-2;
   emacs-workarounded = emacs // {
