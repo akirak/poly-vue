@@ -8,7 +8,7 @@ let
   emacs-ci = import (builtins.fetchTarball "https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz");
   emacs = emacs-ci.emacs-25-2;
   emacs-workarounded = emacs // {
-    meta = emacs.meta // with pkgs.stdenv.lib; { platforms = platforms.all };
+    meta = emacs.meta // { platforms = pkgs.stdenv.lib.platforms.all; };
   };
 in check-package {
   inherit pkgs;
