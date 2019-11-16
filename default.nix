@@ -6,6 +6,10 @@ let
     rev = "1553d9f6c8d61e8f455f22e4a1d0743bc8cd48a9";
   });
   emacs-ci = import (builtins.fetchTarball "https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz");
+  emacs = emacs-ci.emacs-25-2;
+  emacs-workarounded = emacs // {
+    meta = emacs.meta // with pkgs.stdenv.lib; { platforms = platforms.all };
+  };
 in check-package {
   inherit pkgs;
   name = "emacs-poly-vue";
@@ -14,5 +18,5 @@ in check-package {
   emacsPackages = epkgs: (with epkgs.melpaPackages; [
     polymode
   ]);
-  emacs = emacs-ci.emacs-25-2;
+  emacs = emacs-workarounded;
 }
