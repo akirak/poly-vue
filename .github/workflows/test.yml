@@ -6,9 +6,17 @@ on:
     - '**/*.md'
     - '**/*.org'
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        emacs-version:
+          - emacs-25-1
+          - emacs-25-3
+          - emacs-26-1
+          - emacs-26-3
     steps:
     - name: install nix
       uses: cachix/install-nix-action@v5
@@ -21,6 +29,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run tests
       run: |
-        nix-build -A byte-compile --no-out-link --quiet
-        nix-build -A checkdoc --no-out-link --quiet
-        nix-shell -A package-lint --pure --quiet
+        nix-build --arg emacs emacs-ci.${{ matrix.emacs-version }} -A byte-compile --no-out-link --quiet
+        nix-build --arg emacs emacs-ci.${{ matrix.emacs-version }} -A checkdoc --no-out-link --quiet
+        nix-shell --arg emacs emacs-ci.${{ matrix.emacs-version }} -A package-lint --pure --quiet
