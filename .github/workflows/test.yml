@@ -28,6 +28,7 @@ jobs:
       run: nix-env --version
     - uses: actions/checkout@v1
     - run: nix-channel --add https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz emacs-ci
+    - run: nix-channel --update
     - name: Run tests
       run: |
         nix-build --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A byte-compile --no-out-link --quiet
