@@ -31,6 +31,7 @@ jobs:
     - run: nix-channel --update
     - name: Run tests
       run: |
+        set -e
         nix-build --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A byte-compile --no-out-link --quiet
         nix-build --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A checkdoc --no-out-link --quiet
         nix-shell --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A package-lint --pure --quiet
