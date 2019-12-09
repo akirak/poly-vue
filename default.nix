@@ -4,7 +4,7 @@
 let
   check-package = import (builtins.fetchTarball "https://github.com/akirak/emacs-package-checker/archive/v1/master.tar.gz");
   emacs-workarounded = emacs // {
-    meta = emacs.meta // { platforms = pkgs.stdenv.lib.platforms.all; };
+    meta.platforms = pkgs.stdenv.lib.platforms.all;
   };
 in check-package {
   inherit pkgs;
