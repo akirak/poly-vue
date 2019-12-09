@@ -27,10 +27,9 @@ jobs:
     - name: check if nix is installed
       run: nix-env --version
     - uses: actions/checkout@v1
+    - run: nix-channel --add https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz emacs-ci
     - name: Run tests
       run: |
-        nix-build --arg emacs "${EMACS_CI}".${{ matrix.emacs-version }} -A byte-compile --no-out-link --quiet
-        nix-build --arg emacs "${EMACS_CI}".${{ matrix.emacs-version }} -A checkdoc --no-out-link --quiet
-        nix-shell --arg emacs "${EMACS_CI}".${{ matrix.emacs-version }} -A package-lint --pure --quiet
-      env:
-        EMACS_CI: 'import (builtins.fetchTarball "https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz")'
+        nix-build --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A byte-compile --no-out-link --quiet
+        nix-build --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A checkdoc --no-out-link --quiet
+        nix-shell --arg emacs "(import <emacs-ci>).${{ matrix.emacs-version }}" -A package-lint --pure --quiet
