@@ -27,8 +27,8 @@ jobs:
         path: /nix/store
         key: ${{ runner.os }}-nix-${{ hashFiles('**/default.nix') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-nix-${{ env.cache-name }}-
+          ${{ runner.os }}-nix-
           ${{ runner.os }}-        
     - name: install cachix
       run: nix-env -iA cachix -f https://cachix.org/api/v1/install
