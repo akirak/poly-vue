@@ -24,7 +24,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: /nix/store
-        key: ${{ runner.os }}-nix-${{ hashFiles('**/*.nix') }}
+        key: ${{ runner.os }}-nix-${{ hashFiles('**/default.nix') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
