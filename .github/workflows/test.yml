@@ -20,6 +20,7 @@ jobs:
     steps:
     - name: install nix
       uses: cachix/install-nix-action@v5
+    - uses: actions/checkout@v1
     - name: Cache the nix store
       uses: actions/cache@v1
       with:
@@ -35,7 +36,6 @@ jobs:
       run: cachix use emacs-ci
     - name: check if nix is installed
       run: nix-env --version
-    - uses: actions/checkout@v1
     - run: nix-channel --add https://github.com/purcell/nix-emacs-ci/archive/master.tar.gz emacs-ci
     - run: nix-channel --update
     - name: Run tests
