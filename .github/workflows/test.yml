@@ -20,6 +20,15 @@ jobs:
     steps:
     - name: install nix
       uses: cachix/install-nix-action@v5
+    - name: Cache the nix store
+      uses: actions/cache@v1
+      with:
+        path: /nix/store
+        key: ${{ runner.os }}-nix-${{ hashFiles('**/*.nix') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-        
     - name: install cachix
       run: nix-env -iA cachix -f https://cachix.org/api/v1/install
     - name: enable cachix for emacs-ci
