@@ -6,6 +6,8 @@ on:
     - '**/*.md'
     - '**/*.org'
 
+env:
+  NIX_STORE_DIR: /home/runner/.nix-store
 
 jobs:
   build:
@@ -22,7 +24,7 @@ jobs:
     - name: Cache the nix store
       uses: actions/cache@v1
       with:
-        path: /nix/store
+        path: /home/runner/.nix-store
         key: ${{ runner.os }}-nix-${{ hashFiles('**/default.nix') }}
         restore-keys: |
           ${{ runner.os }}-nix-${{ env.cache-name }}-
