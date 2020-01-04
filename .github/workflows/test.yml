@@ -18,8 +18,6 @@ jobs:
           - emacs-26-1
           - emacs-26-3
     steps:
-    - name: install nix
-      uses: cachix/install-nix-action@v5
     - uses: actions/checkout@v1
     - name: Cache the nix store
       uses: actions/cache@v1
@@ -30,6 +28,8 @@ jobs:
           ${{ runner.os }}-nix-${{ env.cache-name }}-
           ${{ runner.os }}-nix-
           ${{ runner.os }}-        
+    - name: install nix
+      uses: cachix/install-nix-action@v5
     - name: install cachix
       run: nix-env -iA cachix -f https://cachix.org/api/v1/install
     - name: enable cachix for emacs-ci
